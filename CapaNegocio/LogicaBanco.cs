@@ -10,11 +10,11 @@
         }
 
         public string EvaluarCredito(
-            decimal monto,
-            int plazo,
-            decimal ingresos,
-            decimal egresos,
-            int nroDoc)
+    decimal monto,
+    int plazo,
+    decimal ingresos,
+    decimal egresos,
+    int nroDoc)
         {
             // Validar plazo
             if (plazo < 1 || plazo > 72)
@@ -25,18 +25,19 @@
             if (balanza <= 0)
                 return "Balanza negativa o cero. Crédito denegado";
 
-            // Calcular relación
+            // Calcular relación crédito/balanza
             decimal relacion = (monto / plazo) / balanza;
 
-            // Obtener puntaje
+            // Validar relación antes de consultar la BD
+            if (relacion >= 0.95M)
+                return "Relación crédito/balanza demasiado alta. Denegado";
+
+            // Consultar BD solo si es necesario
             var riesgo = accesoDatos.ConsultarRiesgo(nroDoc);
             if (!int.TryParse(riesgo.Puntaje, out int puntaje))
                 return "Error obteniendo puntaje de riesgo";
 
-            // Evaluar reglas
-            if (relacion >= 0.95M)
-                return "Relación crédito/balanza demasiado alta. Denegado";
-
+            // Resto de validaciones con puntaje
             if (relacion >= 0.7M)
                 return puntaje >= 800 ? "Aprobado" : "Puntaje insuficiente (<800)";
 
