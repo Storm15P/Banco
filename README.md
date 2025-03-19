@@ -1,4 +1,4 @@
-# Parcial 1 Arquitectura del Software
+# Parcial 1: Arquitectura del Software
 
 ## Herramientas usadas
 
