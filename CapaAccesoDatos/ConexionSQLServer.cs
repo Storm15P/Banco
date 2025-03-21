@@ -9,7 +9,7 @@ namespace CapaAccesoDatos
 
         public ConexionSQLServer()
         {
-            conexion = new SqlConnection(@"TrustServerCertificate=true;Password=Microsoftxbox1!;Persist Security Info=True;User ID=sa;Initial Catalog=Banco;Data Source=LENOVOSW\SQLEXPRESS");
+            conexion = new SqlConnection(@"TrustServerCertificate=true;Password=sa;Persist Security Info=True;User ID=sa;Initial Catalog=Banco;Data Source=LENOVOSW\SQLEXPRESS");
         }
 
         public RiesgoDTO ConsultarRiesgo(string nroDoc)
